@@ -12,11 +12,11 @@ from time import sleep
 def getPet(pet):
         score = []
         pets = ['ant1', 'ant2', 'ant3', 'beaver1', 'beaver2', 'beaver3',
-                'cricket1', 'cricket2', 'cricket3', 'duck1', 'duck2'
+                'cricket1', 'cricket2', 'cricket3', 'duck1', 'duck2',
                 'duck3', 'fish1', 'fish2', 'fish3', 'horse1', 'horse2', 'horse3',
                 'mosquito1', 'mosquito2', 'mosquito3', 'otter1', 'otter2',
                 'otter3', 'pig1', 'pig2', 'pig3']
-        dir = r'pets'
+        dir = r'pets/Windows'
         for entry in os.scandir(dir):
                 if(entry.path.endswith(".png")):
                         #print(entry.path)
@@ -24,10 +24,11 @@ def getPet(pet):
                         score.append(np.sum(cv2.subtract(pet, test_pet)))
 
         minimum = min(score)
-        ind = score.index(minimum) - 1
+        ind = score.index(minimum)
         petID = pets[ind]
         ind
-        print(score)
+        #print(ind)
+        #print(score)
         return(petID)
 
 def on_press(key, abortKey = 'esc'):
@@ -48,21 +49,21 @@ def on_press(key, abortKey = 'esc'):
         cv2.imwrite("image.png", image)
         # image = imutils.resize(image, width = 600)
         # WINDOWS:
-        # pet1 = image[755:1065,640:820]
-        # pet2 = image[755:1065,820:1000]
-        # pet3 = image[755:1065,1010:1190]
+        pet1 = image[755:1065,640:820]
+        pet2 = image[755:1065,820:1000]
+        pet3 = image[755:1065,1010:1190]
 
         # MAC:
-        pet1 = image[955:1315,680:895]
-        pet2 = image[955:1315,895:1110]
-        pet3 = image[955:1315,1110:1325]
+        # pet1 = image[955:1315,680:895]
+        # pet2 = image[955:1315,895:1110]
+        # pet3 = image[955:1315,1110:1325]
 
         cv2.imwrite("pet1.png", pet1)
         cv2.imwrite("pet2.png", pet2)
         cv2.imwrite("pet3.png", pet3)
-        print(getPet(pet1))
-        print(getPet(pet2))
-        print(getPet(pet3))
+        print('Pet 1: ' + getPet(pet1))
+        print('Pet 2: ' + getPet(pet2))
+        print('Pet 3: ' + getPet(pet3))
     else:
         return True
 
